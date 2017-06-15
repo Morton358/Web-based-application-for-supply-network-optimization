@@ -276,9 +276,5 @@ else:
     print('something goes wrong with mathematical Model')
 
 
-'''return (I, R, E, i, r, e, W, G, K, V, J1_I, J1_R, J1_R__1_I, J1_R__1_I_arr, J1_R__1_E, J1_R__1_E_arr, S, Q, Q_TIR,
-        Z, Z1_R, Z1_R_in_l, Y, A1_R__1_I, A1_R__1_I_arr, A1_R__1_E, A1_R__1_E_arr, c1_R__1_I, c1_R__1_I_arr,
-        c1_R__1_E, c1_R__1_E_arr, C, X1_R__1_I, X1_R__1_I_arr, X1_R__1_E, X1_R__1_E_arr, W1_I, D1_R, W_all, K_all,
-        G_all, P1_I, P1_R, P1_R__1_I, P1_R__1_E, P1_R__1_I_arr, P1_R__1_E_arr, P_all)'''
 
 
