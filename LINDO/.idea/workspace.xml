@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="532debfb-ef86-4265-a64e-c197c9941043" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../oBB/main_oBB.py" afterPath="$PROJECT_DIR$/../oBB/main_oBB.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../oBB/prepareDataoBB.py" afterPath="$PROJECT_DIR$/../oBB/prepareDataoBB.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -346,7 +347,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="45" y="24" width="1321" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923076" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
