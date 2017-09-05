@@ -6,8 +6,13 @@ from operator import add
 import mathModel
 import prepareDataLINDO
 from pyLindo import *
+import time
 
 
+#\\\\\\\\\\\\\\\\\\\\\\\\
+# for measure time of compilation
+#////////////////////////
+start_time = time.time()
 
 # \\\\\\\\\\\\\\
 # model data
@@ -59,6 +64,7 @@ errorcode = lindo.pyLSloadLPData(pModel, nCons, nVars, nDir, dObjConst, adC, adB
                                  adA, anRowX, pdLower, pdUpper)
 geterrormessage(pEnv, errorcode)
 
+#errorcode = lindo.pyLSloadVarType(pModel,pachVarType) # When use pachVarType (for example in MIP problem)
 
 #\\\\\\\\\\\\\\\
 #solve the model
@@ -66,6 +72,7 @@ geterrormessage(pEnv, errorcode)
 print("Solving the model...")
 pnStatus = N.array([-1], dtype=N.int32)
 errorcode = lindo.pyLSoptimize(pModel, LSconst.LS_METHOD_FREE, pnStatus)
+#errorcode = lindo.pyLSsolveMIP(pModel,pnStatus)
 geterrormessage(pEnv, errorcode)
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -73,6 +80,7 @@ geterrormessage(pEnv, errorcode)
 #//////////////////////////////
 dObj = N.array([-1.0], dtype=N.double)
 errorcode = lindo.pyLSgetInfo(pModel, LSconst.LS_DINFO_POBJ, dObj)
+#errorcode = lindo.pyLSgetInfo(pModel,LSconst.LS_DINFO_MIP_OBJ,dObj)
 geterrormessage(pEnv, errorcode)
 print("Objective is: %.5f" % dObj[0])
 print("")
@@ -82,6 +90,7 @@ print("")
 #/////////////////////////////
 padPrimal = N.empty((nVars), dtype=N.double)
 errorcode = lindo.pyLSgetPrimalSolution(pModel, padPrimal)
+#errorcode = lindo.pyLSgetMIPPrimalSolution(pModel,padPrimal)
 geterrormessage(pEnv, errorcode)
 print("Primal solution is: ")
 for x in padPrimal:
@@ -95,3 +104,6 @@ geterrormessage(pEnv, errorcode)
 #delete LINDO environment pointer
 errorcode = lindo.pyLSdeleteEnv(pEnv)
 geterrormessage(pEnv, errorcode)
+
+#show time of execution
+print("--- %s seconds ---" % (time.time() - start_time))

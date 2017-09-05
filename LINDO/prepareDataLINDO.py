@@ -358,6 +358,7 @@ print('New constants of function fit: ', constantsOfFunctionFitNew)
 print('and len: ', len(constantsOfFunctionFit))
 print('Constants Of Function Fit: ', constantsOfFunctionFit)'''
 
+flat_matrixOfDecisionVariables = [item for sublist in matrixOfDecisionVariables for item in sublist]
 
 #\\\\\\\\\\\\\
 # some tests:
@@ -376,6 +377,7 @@ print('Verification of data:', "\n",
       'constantsOfDecisionVariableOfConstrain6: ', constantsOfDecisionVariableOfConstrain6, "\n",
       'Length of constantsOfDecisionVariableOfConstrain5: ', len(constantsOfDecisionVariableOfConstrain5), "\n",
       'Matrix of decision variables: ', "\n", DataFrame(matrixOfDecisionVariables), "\n",
+      'Flat matrix: ', flat_matrixOfDecisionVariables, "\n",
       'column-start indices: ', columnStartIndices, "\n",
       'non zero elements: ', nonZeroCoeficients, "\n",
       'row indices: ', rowIndices, "\n",

@@ -27,7 +27,7 @@ J1_R__1_E_arr = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do 
 J1_R__1_E = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (podzielono od każdego zakładu
 #  produkcyjnego do wszystkich klientów)
 S = [] # koszty uruchomienia zakładów produkcyjnych
-Q = 900 # pojemność auta dla transportowania gotowej produkcji (w litrach)
+Q = 500 # pojemność auta dla transportowania gotowej produkcji (w litrach)
 Q_TIR = 24000 # pojemność auta, które transportuje surowiec (w kilogramach)
 # Q_TIR_all = [1/Q_TIR] * I * R  # dla zapisywania w funkcje celu
 Z = [] # ilości już zakupionych surowców u sprzedawców (kg)
