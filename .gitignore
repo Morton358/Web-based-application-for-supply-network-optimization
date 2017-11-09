@@ -2,6 +2,8 @@ LINDO/.idea/*
 oBB/.idea/*
 LINDO/__pycache__/*
 oBB/__pycache__/*
+LINDO/*.mps
+LINDO/*.sol
 
 # User-specific stuff:
 .idea/**/workspace.xml

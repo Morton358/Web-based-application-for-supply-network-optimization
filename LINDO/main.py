@@ -1,9 +1,4 @@
-import random
-import itertools
-import math
-from pandas import *
-from operator import add
-import mathModel
+
 import prepareDataLINDO
 from pyLindo import *
 import time
@@ -55,6 +50,9 @@ pModel = lindo.pyLScreateModel(pEnv, pnErrorCode)
 
 geterrormessage(pEnv, pnErrorCode[0])
 
+#pszFname = "/home/morton/My_Files/Politechnika_Wroclawska/DYPLOM/Program/LINDO/input.mps"
+
+
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\
 #load data into the model
@@ -65,6 +63,8 @@ errorcode = lindo.pyLSloadLPData(pModel, nCons, nVars, nDir, dObjConst, adC, adB
 geterrormessage(pEnv, errorcode)
 
 #errorcode = lindo.pyLSloadVarType(pModel,pachVarType) # When use pachVarType (for example in MIP problem)
+
+lindo.pyLSwriteMPSFile(pModel, "something.mps", 0)
 
 #\\\\\\\\\\\\\\\
 #solve the model

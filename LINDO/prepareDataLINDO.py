@@ -1,8 +1,5 @@
-import random
 import itertools
-import math
 from pandas import *
-from operator import add
 import mathModel
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
