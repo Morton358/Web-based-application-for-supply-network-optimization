@@ -26,6 +26,8 @@ J1_R__1_I = [] # koszt jednostkowy przejazdu od sprzedawców do zakładów produ
 J1_R__1_E_arr = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (jeden ciąg kosztów)
 J1_R__1_E = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (podzielono od każdego zakładu
 #  produkcyjnego do wszystkich klientów)
+M1_R__1_I = [] # dystans od sprzedawca do zakładu produkcyjnego
+M1_R__1_E = [] # dystans od zakładu produkcyjnego do jednostki sprzedającej gotową produkcję
 S = [] # koszty uruchomienia zakładów produkcyjnych
 Q = 500 # pojemność auta dla transportowania gotowej produkcji (w litrach)
 Q_TIR = 24000 # pojemność auta, które transportuje surowiec (w kilogramach)
@@ -75,8 +77,10 @@ for k in range(I):
     Ji = round(random.uniform(0.5, 3.0), 2) # koszt surowca od 0.5 zł do 3 zł za kilogram
     J1_I.append(Ji)
     for k in range(R):
-        Jri = round(random.uniform(1, 3.5), 2) # cena za 1 km przewozu surowca autem cięzarowym
+        Jri = round(random.uniform(2, 4.5), 2) # cena za 1 km przewozu surowca autem cięzarowym
         J1_R__1_I_arr.append(Jri)
+        Mri = round(random.uniform(8.0, 35.5), 1) # odległość od i-ego sprzdawcy do r-ego przedsiębiorstwa
+        M1_R__1_I.append(Mri)
         Ari = random.randint(0, 50000) # ogólna ilość surowca, którą było przetransportowano od i-ego sprzedawcy
         # do r-ego zakładu produkcyjnego
         A1_R__1_I_arr.append(Ari)
@@ -105,8 +109,10 @@ for k in range(R):
     Jr = round(random.uniform(1, 1.9), 2) # cena od 1 do 1.9 zł za wyprodukowania 1 l. soku
     J1_R.append(Jr)
     for k in range(E):
-        Jre = round(random.uniform(0.4, 2.0), 2) # cena za 1 km przewozu produkcji
+        Jre = round(random.uniform(0.4, 2.5), 2) # cena za 1 km przewozu produkcji
         J1_R__1_E_arr.append(Jre)
+        Mre = round(random.uniform(1.5, 13.5), 1)  # odległość od r-ego przedsiębiorstwa do e-go sprzedawcy
+        M1_R__1_E.append(Mre)
         Are = random.randint(0, 5000) # ogólna ilość produktu, którą było przetransportowano
         # od r-ego zakładu produkcyjnego do e-ego klienta
         A1_R__1_E_arr.append(Are)
