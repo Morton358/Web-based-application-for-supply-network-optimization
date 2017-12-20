@@ -10,7 +10,7 @@ from operator import add
 #def mathematicalModel(countI, countR, countE):
 I = 3 #random.randint(2, 20) # 3
 R = 3 #random.randint(2, 10) # 3
-E = 3 #random.randint(2, 50) # 5
+E = 5 #random.randint(2, 50) # 5
 i = [] # numery jednostek sprzedającej surowiec
 r = [] # numery/indeksy jednostek produkcyjnych
 e = [] # numery/indeksy klientów którzy tworzą zapotrzebowanie w produkcii jednostek produkcyjnych
@@ -27,7 +27,7 @@ J1_R__1_E_arr = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do 
 J1_R__1_E = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (podzielono od każdego zakładu
 #  produkcyjnego do wszystkich klientów)
 M1_R__1_I = [] # dystans od sprzedawca do zakładu produkcyjnego
-M1_R__1_E = [] # dystans od zakładu produkcyjnego do jednostki sprzedającej gotową produkcję
+M1_R__1_E = [] # dystans od zakładu produkcyjnego do jednostki, sprzedającej gotową produkcję
 S = [] # koszty uruchomienia zakładów produkcyjnych
 Q = 500 # pojemność auta dla transportowania gotowej produkcji (w litrach)
 Q_TIR = 24000 # pojemność auta, które transportuje surowiec (w kilogramach)
@@ -201,6 +201,7 @@ print('numery jednostek sprzedającej surowiec: ', "\n",
       e, "\n",
       'ilość surowca u każdego z sprzedawców:', "\n",
       W, "\n",
+      'W: ', W, "\n",
       'obserwowana produkcyjna moc każdego z zakładów produkcyjnych: ', "\n",
       G, "\n",
       'obserwowany popyt/zapotrzebowanie na produkcje przedsiębiorstwa każdego klienta: ', "\n",
@@ -214,8 +215,16 @@ print('numery jednostek sprzedającej surowiec: ', "\n",
       J1_R, "\n",
       'koszt jednostkowy przejazdu od sprzedawców do zakładów produkcyjnych: ', "\n",
       DataFrame(J1_R__1_I), "\n",
+      'J1_R__1_I: ', J1_R__1_I, "\n",
+      'J1_R__1_I_arr: ', J1_R__1_I_arr, "\n",
       'koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów: ', "\n",
       DataFrame(J1_R__1_E), "\n",
+      'J1_R__1_E: ', J1_R__1_E, "\n",
+      'J1_R__1_E_arr: ', J1_R__1_E_arr, "\n",
+      'odległość od i-ego sprzdawcy do r-ego przedsiębiorstwa: ', "\n",
+      M1_R__1_I, "\n",
+      'odległość od r-ego przedsiębiorstwa do e-go sprzedawcy: ', "\n",
+      M1_R__1_E, "\n",
       'koszty uruchomienia zakładów produkcyjnych: ', "\n",
       S, "\n",
       'pojemność auta dla transportowania gotowej produkcji (w litrach): ', "\n",
@@ -226,13 +235,18 @@ print('numery jednostek sprzedającej surowiec: ', "\n",
       Z, "\n",
       'ilość już przywiezionego surowca do zakładów produkcyjnych (kg): ', "\n",
       Z1_R, "\n",
+      'Z1_R:', Z1_R, "\n",
+      'A1_R__1_E_arr:', A1_R__1_E_arr, "\n",
+      'A1_R__1_I_arr', A1_R__1_I_arr, "\n",
       'ilość już wyprodukowanych produktów na zakładach produkcyjnych '
       'ale nie dowiezionych jeszcze do klientów (l): ', "\n",
       Y, "\n",
       'ogólna ilość surowca, którą było przetransportowano od sprzedawców do zakładów produkcyjnych: ', "\n",
       DataFrame(A1_R__1_I), "\n",
+      A1_R__1_I, "\n",
       'ogólna ilość produktu, którą było przetransportowano od zakładów produkcyjnych do klientów: ', "\n",
       DataFrame(A1_R__1_E), "\n",
+      'A1_R__1_E: ', A1_R__1_E, "\n",
       'strata przy transportowaniu surowca od sprzedawców do zakładów produkcyjnych: ', "\n",
       DataFrame(c1_R__1_I), "\n",
       'strata przy transportowaniu produktów od zakładów produkcyjnych do klientów: ', "\n",

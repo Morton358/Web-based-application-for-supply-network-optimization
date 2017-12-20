@@ -2,6 +2,8 @@ import itertools
 from pandas import *
 from operator import mul
 import mathModel
+import forResearch
+import forResearch2
 
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -92,9 +94,9 @@ signsOfConstrain1 = [greaterThenEqual for i in range(mathModel.R * mathModel.I)]
 signsOfConstrainExpressions.extend(signsOfConstrain1)
 signsOfConstrain2 = [greaterThenEqual for i in range(mathModel.R * mathModel.E)]
 signsOfConstrainExpressions.extend(signsOfConstrain2)
-signsOfConstrain8 = [equalTo for i in range(mathModel.R * mathModel.I)]
+signsOfConstrain8 = [lessThenEqual for i in range(mathModel.R * mathModel.I)]
 signsOfConstrainExpressions.extend(signsOfConstrain8)
-signsOfConstrain9 = [equalTo for i in range(mathModel.R * mathModel.E)]
+signsOfConstrain9 = [lessThenEqual for i in range(mathModel.R * mathModel.E)]
 signsOfConstrainExpressions.extend(signsOfConstrain9)
 
 
