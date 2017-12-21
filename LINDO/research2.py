@@ -12,7 +12,8 @@ data = {}
 data["i3r3e5"] = mathModel.Modell([3, 3, 5])
 print(data["i3r3e5"].Z1_R)
 with open('research2.txt', 'a') as plik:
-    plik.write("For I=3; R=3; E=5; \n Starting values for Z1_R: {} \n".format(data["i3r3e5"].Z1_R))
+    plik.write("For I=3; R=3; E=5; \n Starting values for Z1_R: {} \n"
+               "Współczynnik produkcji V: {} \n".format(data["i3r3e5"].Z1_R, data["i3r3e5"].V))
     plik.close()
 counter = 0
 for counter in range(202):

@@ -12,7 +12,7 @@ data["i3r3e5"] = mathModel.Modell([3, 3, 5])
 print(data["i3r3e5"].K)
 with open('research3.3.1.txt', 'a') as plik:
     plik.write("For I=3; R=3; E=5; \n Starting values for K (poprawka na to że zmiany w 10 raz mniejsze w porównaniu"
-               "do 3.1 i 3.2): {} \n".format(data["i3r3e5"].K))
+               "do 3.1 i 3.2): {} \n Współczynnik produkcji V: {} \n".format(data["i3r3e5"].K, data["i3r3e5"].V))
     plik.close()
 counter = 0
 for counter in range(602):

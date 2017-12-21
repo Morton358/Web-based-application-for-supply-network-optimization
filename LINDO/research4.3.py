@@ -1,3 +1,4 @@
+
 import itertools
 from pandas import *
 from operator import mul
@@ -9,13 +10,12 @@ import forResearch2
 
 data = {}
 data["i3r3e5"] = mathModel.Modell([12, 5, 25])
-print(data["i3r3e5"].Y)
-with open('research2.5.txt', 'a') as plik:
-    plik.write("For I=12; R=5; E=25; \n Starting values for Y: {} \n"
-               "Współczynnik produkcji V: {} \n".format(data["i3r3e5"].Y, data["i3r3e5"].V))
+print(data["i3r3e5"].V)
+with open('research4.3.txt', 'a') as plik:
+    plik.write("For I=12; R=5; E=25; \n Starting values for V: {} \n ".format(data["i3r3e5"].V))
     plik.close()
 counter = 0
-for counter in range(202):
+for counter in range(602):
 
     # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     # block with prepearing data for transfering into solver
@@ -773,7 +773,7 @@ for counter in range(202):
     geterrormessage(pEnv, errorcode)
     print("Objective is: %.5f" % dObj[0])
     print("")
-    with open('research2.5.txt', 'a') as plik:
+    with open('research4.3.txt', 'a') as plik:
         plik.write("Objective is: %.5f \n" % dObj[0])
         plik.close()
 
@@ -800,18 +800,18 @@ for counter in range(202):
     print("--- %s seconds ---" % (time.time() - start_time))
 
     temp = []
-    for i in data["i3r3e5"].Y:
-        if counter < 100:
-            temp.append(i + 100)
-        elif counter == 100:
-            temp.append(i - 10000)
-        elif counter > 100:
-            temp.append(i - 100)
-    data["i3r3e5"].Y = temp
+    for i in data["i3r3e5"].V:
+        if counter < 300:
+            temp.append(i + 0.01)
+        elif counter == 300:
+            temp.append(i - 3)
+        elif counter > 300:
+            temp.append(i - 0.01)
+    data["i3r3e5"].V = temp
     counter += 1
-    with open('research2.5.txt', 'a') as plik:
+    with open('research4.3.txt', 'a') as plik:
         plik.write("Number of iteration: {} \n "
-                   "New value of Y: {} \n".format(counter, data["i3r3e5"].Y))
+                   "New value of V: {} \n".format(counter, data["i3r3e5"].V))
         plik.close()
 
 
