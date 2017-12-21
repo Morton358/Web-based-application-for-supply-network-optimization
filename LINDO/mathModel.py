@@ -42,7 +42,7 @@ class Modell:
         # Q_TIR_all = [1/Q_TIR] * I * R  # dla zapisywania w funkcje celu
         self.Z = [] # ilości już zakupionych surowców u sprzedawców (kg)
         self.Z1_R = [] # ilość już przywiezionego surowca do zakładów produkcyjnych (kg)
-        self.Z1_R_in_l = [] # ilość już przywiezionego surowca do zakładów produkcyjnych (l)
+        self.Z1_R_in_l = [] # ilość już pfładów produkcyjnych (l)
         self.Y = [] # ilość już wyprodukowanych produktów na zakładach produkcyjnych ale nie dowiezionych jeszcze do klientów
         self.A1_R__1_I_arr = [] # ogólna ilość surowca, którą było przetransportowano od sprzedawców do zakładów produkcyjnych
         # (jeden ciąg ilości)
@@ -133,9 +133,9 @@ class Modell:
 
             Sr = random.randint(3500, 6500) # koszt uruchomienia zakładów produkcyjnych
             self.S.append(Sr)
-            Zr = random.randint(5000, 100000) # Ilość już przywiezionego surowca do R-ego zakładu produkcyjnego w kg.
+            Zr = random.randint(8000, 15000) # Ilość już przywiezionego surowca do R-ego zakładu produkcyjnego w kg.
             self.Z1_R.append(Zr)
-            Yr = random.randint(500, 100000)  # ilość wyprodukowanego produktu na r-ym zakładzie produkcyjnym (w l.)
+            Yr = random.randint(500, 10000)  # ilość wyprodukowanego produktu na r-ym zakładzie produkcyjnym (w l.)
             self.Y.append(Yr)
             Cr = random.randint(500, 100000) # strata przy produkcji, na r-ym zakładzie produkcyjnym
             self.C.append(Cr)
