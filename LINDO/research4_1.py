@@ -9,10 +9,10 @@ import forResearch
 import forResearch2
 
 data = {}
-data["i3r3e5"] = mathModel.Modell([5, 3, 10])
-print(data["i3r3e5"].Q_TIR)
-with open('research5.2.2.txt', 'a') as plik:
-    plik.write("For I=5; R=3; E=10; \n Starting values for Q_TIR: {} \n ".format(data["i3r3e5"].Q_TIR))
+data["i3r3e5"] = mathModel.Modell([3, 3, 5])
+print(data["i3r3e5"].V)
+with open('research4.1.txt', 'a') as plik:
+    plik.write("For I=3; R=3; E=5; \n Starting values for V: {} \n ".format(data["i3r3e5"].V))
     plik.close()
 counter = 0
 for counter in range(602):
@@ -252,7 +252,7 @@ for counter in range(602):
     for lists in constantsOfDecisionVariableOfConstrain8i1:
         indexOfLists += 1
         iterator = indexOfLists
-        lists[iterator] = 1 / int(data["i3r3e5"].Q_TIR)
+        lists[iterator] = 1 / data["i3r3e5"].Q_TIR
 
     iterator = 0
     indexOfLists = -1
@@ -266,7 +266,7 @@ for counter in range(602):
     for lists in constantsOfDecisionVariableOfConstrain9i2:
         indexOfLists += 1
         iterator = indexOfLists
-        lists[iterator] = 1 / int(data["i3r3e5"].Q)
+        lists[iterator] = 1 / data["i3r3e5"].Q
 
     iterator = 0
     indexOfLists = -1
@@ -729,7 +729,7 @@ for counter in range(602):
     # create LINDO environment and model objects
     # //////////////////////////////////////////
     LicenseKey = N.array('', dtype='S1024')
-    lindo.pyLSloadLicenseString('/home/morton/My_Files/Politechnika_Wroclawska/DYPLOM/lindoapi/license/lndapi100.lic',
+    lindo.pyLSloadLicenseString('./lndapi100.lic',
                                 LicenseKey)
     pnErrorCode = N.array([-1], dtype=N.int32)  # A reference to an integer to return the error code
     pEnv = lindo.pyLScreateEnv(pnErrorCode, LicenseKey)
@@ -773,7 +773,7 @@ for counter in range(602):
     geterrormessage(pEnv, errorcode)
     print("Objective is: %.5f" % dObj[0])
     print("")
-    with open('research5.2.2.txt', 'a') as plik:
+    with open('research4.1.txt', 'a') as plik:
         plik.write("Objective is: %.5f \n" % dObj[0])
         plik.close()
 
@@ -799,18 +799,19 @@ for counter in range(602):
     # show time of execution
     print("--- %s seconds ---" % (time.time() - start_time))
 
-    temp = 0
-    if counter < 300:
-        temp = data["i3r3e5"].Q_TIR + 10
-    elif counter == 300:
-        temp = data["i3r3e5"].Q_TIR - 2350
-    elif counter > 300:
-        temp = data["i3r3e5"].Q_TIR - 10
-    data["i3r3e5"].Q_TIR = temp
+    temp = []
+    for i in data["i3r3e5"].V:
+        if counter < 300:
+            temp.append(i + 0.01)
+        elif counter == 300:
+            temp.append(i - 3)
+        elif counter > 300:
+            temp.append(i - 0.01)
+    data["i3r3e5"].V = temp
     counter += 1
-    with open('research5.2.2.txt', 'a') as plik:
+    with open('research4.1.txt', 'a') as plik:
         plik.write("Number of iteration: {} \n "
-                   "New value of Q_TIR: {} \n".format(counter, data["i3r3e5"].Q_TIR))
+                   "New value of V: {} \n".format(counter, data["i3r3e5"].V))
         plik.close()
 
 

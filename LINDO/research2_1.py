@@ -9,13 +9,13 @@ import forResearch2
 
 data = {}
 data["i3r3e5"] = mathModel.Modell([5, 3, 10])
-print(data["i3r3e5"].K)
-with open('research3.3.2.txt', 'a') as plik:
-    plik.write("For I=5; R=3; E=10; \n Starting values for K (poprawka na to że zmiany w 10 raz mniejsze w porównaniu"
-               "do 3.1 i 3.2): {} \n Współczynnik produkcji V: {} \n".format(data["i3r3e5"].K, data["i3r3e5"].V))
+print(data["i3r3e5"].Z1_R)
+with open('research2.1.txt', 'a') as plik:
+    plik.write("For I=5; R=3; E=10; \n Starting values for Z1_R: {} \n "
+               "Współczynnik produkcji V: {} \n".format(data["i3r3e5"].Z1_R, data["i3r3e5"].V))
     plik.close()
 counter = 0
-for counter in range(602):
+for counter in range(202):
 
     # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     # block with prepearing data for transfering into solver
@@ -729,7 +729,7 @@ for counter in range(602):
     # create LINDO environment and model objects
     # //////////////////////////////////////////
     LicenseKey = N.array('', dtype='S1024')
-    lindo.pyLSloadLicenseString('/home/morton/My_Files/Politechnika_Wroclawska/DYPLOM/lindoapi/license/lndapi100.lic',
+    lindo.pyLSloadLicenseString('./lndapi100.lic',
                                 LicenseKey)
     pnErrorCode = N.array([-1], dtype=N.int32)  # A reference to an integer to return the error code
     pEnv = lindo.pyLScreateEnv(pnErrorCode, LicenseKey)
@@ -773,7 +773,7 @@ for counter in range(602):
     geterrormessage(pEnv, errorcode)
     print("Objective is: %.5f" % dObj[0])
     print("")
-    with open('research3.3.2.txt', 'a') as plik:
+    with open('research2.1.txt', 'a') as plik:
         plik.write("Objective is: %.5f \n" % dObj[0])
         plik.close()
 
@@ -800,18 +800,18 @@ for counter in range(602):
     print("--- %s seconds ---" % (time.time() - start_time))
 
     temp = []
-    for i in data["i3r3e5"].K:
-        if counter < 300:
-            temp.append(i + (1000/2))
-        elif counter == 300:
-            temp.append(i - (300000/2))
-        elif counter > 300:
-            temp.append(i - (1000/2))
-    data["i3r3e5"].K = temp
+    for i in data["i3r3e5"].Z1_R:
+        if counter < 100:
+            temp.append(i + 100)
+        elif counter == 100:
+            temp.append(i - 10000)
+        elif counter > 100:
+            temp.append(i - 100)
+    data["i3r3e5"].Z1_R = temp
     counter += 1
-    with open('research3.3.2.txt', 'a') as plik:
+    with open('research2.1.txt', 'a') as plik:
         plik.write("Number of iteration: {} \n "
-                   "New value of K: {} \n".format(counter, data["i3r3e5"].K))
+                   "New value of Z1_R: {} \n".format(counter, data["i3r3e5"].Z1_R))
         plik.close()
 
 

@@ -8,10 +8,10 @@ import forResearch
 import forResearch2
 
 data = {}
-data["i3r3e5"] = mathModel.Modell([12, 5, 25])
+data["i3r3e5"] = mathModel.Modell([3, 3, 5])
 print(data["i3r3e5"].G)
-with open('research3.2.3.txt', 'a') as plik:
-    plik.write("For I=5; R=3; E=10; \n Starting values for G : {} \n"
+with open('research3.2.1.txt', 'a') as plik:
+    plik.write("For I=3; R=3; E=5; \n Starting values for G : {} \n"
                "Współczynnik produkcji V: {} \n".format(data["i3r3e5"].G, data["i3r3e5"].V))
     plik.close()
 counter = 0
@@ -729,7 +729,7 @@ for counter in range(602):
     # create LINDO environment and model objects
     # //////////////////////////////////////////
     LicenseKey = N.array('', dtype='S1024')
-    lindo.pyLSloadLicenseString('/home/morton/My_Files/Politechnika_Wroclawska/DYPLOM/lindoapi/license/lndapi100.lic',
+    lindo.pyLSloadLicenseString('./lndapi100.lic',
                                 LicenseKey)
     pnErrorCode = N.array([-1], dtype=N.int32)  # A reference to an integer to return the error code
     pEnv = lindo.pyLScreateEnv(pnErrorCode, LicenseKey)
@@ -773,7 +773,7 @@ for counter in range(602):
     geterrormessage(pEnv, errorcode)
     print("Objective is: %.5f" % dObj[0])
     print("")
-    with open('research3.2.3.txt', 'a') as plik:
+    with open('research3.2.1.txt', 'a') as plik:
         plik.write("Objective is: %.5f \n" % dObj[0])
         plik.close()
 
@@ -809,7 +809,7 @@ for counter in range(602):
             temp.append(i - (10000/data["i3r3e5"].V[data["i3r3e5"].G.index(i)]))
     data["i3r3e5"].G = temp
     counter += 1
-    with open('research3.2.3.txt', 'a') as plik:
+    with open('research3.2.1.txt', 'a') as plik:
         plik.write("Number of iteration: {} \n "
                    "New value of G: {} \n".format(counter, data["i3r3e5"].G))
         plik.close()
