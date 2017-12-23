@@ -4,6 +4,7 @@ LINDO/__pycache__/*
 oBB/__pycache__/*
 LINDO/*.mps
 LINDO/*.sol
+LINDO/Vagrantfile
 
 # User-specific stuff:
 .idea/**/workspace.xml
