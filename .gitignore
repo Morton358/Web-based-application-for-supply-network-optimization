@@ -1,11 +1,11 @@
 LINDO/.idea/*
-oBB/.idea/*
 LINDO/__pycache__/*
-oBB/__pycache__/*
 LINDO/*.mps
 LINDO/*.sol
 LINDO/Vagrantfile
 LINDO/.vagrant/*
+/LINDO/*.txt
+/LINDO/test/*
 
 # User-specific stuff:
 .idea/**/workspace.xml
