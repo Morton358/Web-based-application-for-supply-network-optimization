@@ -2,8 +2,7 @@ import itertools
 from pandas import *
 from operator import mul
 import mathModel
-import forResearch
-import forResearch2
+
 
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
