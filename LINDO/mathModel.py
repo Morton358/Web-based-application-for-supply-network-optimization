@@ -11,7 +11,7 @@ from operator import add
 #def mathematicalModel(countI, countR, countE):
 I = 3 #random.randint(2, 20) # 3
 R = 3 #random.randint(2, 10) # 3
-E = 5 #random.randint(2, 50) # 5
+E = 6 #random.randint(2, 50) # 5
 i = [] # numery jednostek sprzedającej surowiec
 r = [] # numery/indeksy jednostek produkcyjnych
 e = [] # numery/indeksy klientów którzy tworzą zapotrzebowanie w produkcii jednostek produkcyjnych
@@ -73,7 +73,7 @@ P_all = [] # koszt całkowity
 
 for k in range(I):
     i.append(k)
-    Wi = random.randint(500000, 10000000) # Ilość surowca w kg.
+    Wi = random.randint(1000, 10000) # Ilość surowca w kg.
     W.append(Wi)
     Ji = round(random.uniform(0.5, 3.0), 2) # koszt surowca od 0.5 zł do 3 zł za kilogram
     J1_I.append(Ji)
@@ -92,7 +92,7 @@ for k in range(I):
         # już przetransportowaliśmy od i-ego sprzedawcy do r-ego zakładu produkcyjnego
         X1_R__1_I_arr.append(Xri)
 
-    Zi = random.randint(10, 25000) # Ilość już zakupionego surowca u I-ego sprzedawcy w kg.
+    Zi = random.randint(500, 10000) # Ilość już zakupionego surowca u I-ego sprzedawcy w kg.
     Z.append(Zi)
 
 J1_R__1_I = [J1_R__1_I_arr[y:y + R] for y in range(0, len(J1_R__1_I_arr), R)]
@@ -103,7 +103,7 @@ X1_R__1_I = [X1_R__1_I_arr[c:c + R] for c in range(0, len(X1_R__1_I_arr), R)]
 
 for k in range(R):
     r.append(k)
-    Gr = random.randint(50000, 150000) # Produkcyjna moc zakładu produkcyjnego w l. na miesiąc
+    Gr = random.randint(10000, 100000) # Produkcyjna moc zakładu produkcyjnego w l. na miesiąc
     Vr = round(random.uniform(1, 2.5), 2) # współczynnik produkcji surowiec na produkt (od 1 do 2)
     G.append(Gr)
     V.append(Vr)
@@ -126,11 +126,11 @@ for k in range(R):
 
     Sr = random.randint(3500, 6500) # koszt uruchomienia zakładów produkcyjnych
     S.append(Sr)
-    Zr = random.randint(5000, 100000) # Ilość już przywiezionego surowca do R-ego zakładu produkcyjnego w kg.
+    Zr = random.randint(500, 5000) # Ilość już przywiezionego surowca do R-ego zakładu produkcyjnego w kg.
     Z1_R.append(Zr)
-    Yr = random.randint(500, 100000)  # ilość wyprodukowanego produktu na r-ym zakładzie produkcyjnym (w l.)
+    Yr = random.randint(100, 5000)  # ilość wyprodukowanego produktu na r-ym zakładzie produkcyjnym (w l.)
     Y.append(Yr)
-    Cr = random.randint(500, 100000) # strata przy produkcji, na r-ym zakładzie produkcyjnym
+    Cr = random.randint(100, 10000) # strata przy produkcji, na r-ym zakładzie produkcyjnym
     C.append(Cr)
 
 J1_R__1_E = [J1_R__1_E_arr[y:y + E] for y in range(0, len(J1_R__1_E_arr), E)]
@@ -140,7 +140,7 @@ X1_R__1_E = [X1_R__1_E_arr[c:c + E] for c in range(0, len(X1_R__1_E_arr), E)]
 
 for k in range(E):
     e.append(k)
-    Ke = random.randint(500, 50000) #Popyt klienta na produkcję przedsiębiorstwa w l.
+    Ke = random.randint(100, 5000) #Popyt klienta na produkcję przedsiębiorstwa w l.
     K.append(Ke)
 
 W1_I = [sum(b) for b in X1_R__1_I] # ogólna ilość surowca, którego już kupiliśmy oraz będziemy kupować u sprzedawców

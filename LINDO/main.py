@@ -80,7 +80,7 @@ geterrormessage(pEnv, errorcode)
 #//////////////////////////////
 dObj = N.array([-1.0], dtype=N.double)
 #errorcode = lindo.pyLSgetInfo(pModel, LSconst.LS_DINFO_POBJ, dObj)
-errorcode = lindo.pyLSgetInfo(pModel,LSconst.LS_DINFO_MIP_OBJ,dObj)
+errorcode = lindo.pyLSgetInfo(pModel, LSconst.LS_DINFO_MIP_OBJ, dObj)
 geterrormessage(pEnv, errorcode)
 print("Objective is: %.5f" % dObj[0])
 print("")
