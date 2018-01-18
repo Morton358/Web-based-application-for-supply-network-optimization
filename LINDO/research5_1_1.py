@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import itertools
 from pandas import *
 from operator import mul
