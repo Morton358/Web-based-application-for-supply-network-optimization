@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import prepareDataLINDO
 from pyLindo import *
 import time
@@ -30,13 +29,12 @@ anRowX = N.array(prepareDataLINDO.rowIndices, dtype=N.int32) # row indices
 pdLower = N.array(prepareDataLINDO.lowerBounds, dtype=N.double) # lower bounds for desition variables
 pdUpper = N.array(prepareDataLINDO.upperBounds, dtype=N.double) # upper bounds for desition variables
 pachVarType = N.array(prepareDataLINDO.pointersToCharacters,dtype=N.character) # A pointer to a character vector
-# containing the type of each variable (‘C’, ‘B’, ‘I’, or ‘S’ for continuous, binary, general integer or semi-continuous, respectively.)
 
-print("\nnCons", nCons, "\nnVars", nVars, "\nnDir", nDir, "\ndObjCons", dObjConst, "\nlen adC", len(adC), "\nadC",
-      adC, "\nlen adB", len(adB),"\nadB", adB, "\nlen acConTypes", len(acConTypes), "\nacConTypes", acConTypes)
-print("\nnNZ", nNZ, "\nlen anBegCol", len(anBegCol), "\nanBegCol", anBegCol, "\npnLenCol", pnLenCol, "\nlen adA",
-      len(adA), "\nadA", adA, "\nlen anRowX", len(anRowX), "\nanRowX", anRowX, "\nlen pdLower", len(pdLower),
-      "\npdLower", pdLower, "\nlen pdUpper", len(pdUpper), "\npdUpper", pdUpper)
+# print("\n nCons", nCons, "\n nVars", nVars, "\nnDir", nDir, "\ndObjCons", dObjConst, "\nlen adC", len(adC), "\nadC",
+#       adC, "\nlen adB", len(adB),"\nadB", adB, "\nlen acConTypes", len(acConTypes), "\nacConTypes", acConTypes)
+# print("\nnNZ", nNZ, "\nlen anBegCol", len(anBegCol), "\nanBegCol", anBegCol, "\npnLenCol", pnLenCol, "\nlen adA",
+#       len(adA), "\nadA", adA, "\nlen anRowX", len(anRowX), "\nanRowX", anRowX, "\nlen pdLower", len(pdLower),
+#       "\npdLower", pdLower, "\nlen pdUpper", len(pdUpper), "\npdUpper", pdUpper)
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #create LINDO environment and model objects
 #//////////////////////////////////////////

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import random
 import itertools
 import math
@@ -9,90 +8,90 @@ from operator import add
 #Mathemetical model of problem
 #//////////////////////////////
 #def mathematicalModel(countI, countR, countE):
-I = 3 #random.randint(2, 20) # 3
-R = 3 #random.randint(2, 10) # 3
-E = 6 #random.randint(2, 50) # 5
-i = [] # numery jednostek sprzedającej surowiec
+I = 2 #random.randint(2, 20) # 3
+R = 2 #random.randint(2, 10) # 3
+E = 2 #random.randint(2, 50) # 5
+i = [] # numery jednostek sprzedajacej surowiec
 r = [] # numery/indeksy jednostek produkcyjnych
-e = [] # numery/indeksy klientów którzy tworzą zapotrzebowanie w produkcii jednostek produkcyjnych
-W = [] # ilość surowca u każdego z sprzedawców
-G = [] # obserwowana produkcyjna moc każdego z zakładów produkcyjnych
-K = [] # obserwowany popyt/zapotrzebowanie na produkcje przedsiębiorstwa każdego klienta
-V = [] # współczynnik produkcji dla przeliczania ilości surowca na ilość produktu na każdym zakładzie produkcyjnym
-J1_I = [] # koszt jednostkowy surowca u każdego sprzedawcy
-J1_R = [] # koszt jednostkowy przetwórstwa owocowo-warzywnej produkcji na każdym zakładzie produkcyjnym
-J1_R__1_I_arr = [] # koszt jednostkowy przejazdu od sprzedawców do zakładów produkcyjnych (jeden ciąg kosztów)
-J1_R__1_I = [] # koszt jednostkowy przejazdu od sprzedawców do zakładów produkcyjnych (podzielono od każdej ...
-# jednostki sprzedającej surowiec do wszystkich zalładów produkcyjnych)
-J1_R__1_E_arr = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (jeden ciąg kosztów)
-J1_R__1_E = [] # koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów (podzielono od każdego zakładu
-#  produkcyjnego do wszystkich klientów)
-M1_R__1_I = [] # dystans od sprzedawca do zakładu produkcyjnego
-M1_R__1_E = [] # dystans od zakładu produkcyjnego do jednostki, sprzedającej gotową produkcję
-S = [] # koszty uruchomienia zakładów produkcyjnych
-Q = 500 # pojemność auta dla transportowania gotowej produkcji (w litrach)
-Q_TIR = 24000 # pojemność auta, które transportuje surowiec (w kilogramach)
+e = [] # numery/indeksy klientow ktorzy tworza zapotrzebowanie w produkcii jednostek produkcyjnych
+W = [] # ilosc surowca u kazdego z sprzedawcow
+G = [] # obserwowana produkcyjna moc kazdego z zakladow produkcyjnych
+K = [] # obserwowany popyt/zapotrzebowanie na produkcje przedsiebiorstwa kazdego klienta
+V = [] # wspolczynnik produkcji dla przeliczania ilosci surowca na ilosc produktu na kazdym zakladzie produkcyjnym
+J1_I = [] # koszt jednostkowy surowca u kazdego sprzedawcy
+J1_R = [] # koszt jednostkowy przetworstwa owocowo-warzywnej produkcji na kazdym zakladzie produkcyjnym
+J1_R__1_I_arr = [] # koszt jednostkowy przejazdu od sprzedawcow do zakladow produkcyjnych (jeden ciag kosztow)
+J1_R__1_I = [] # koszt jednostkowy przejazdu od sprzedawcow do zakladow produkcyjnych (podzielono od kazdej ...
+# jednostki sprzedajacej surowiec do wszystkich zalladow produkcyjnych)
+J1_R__1_E_arr = [] # koszt jednostkowy przejazdu od zakladow produkcyjnych do klientow (jeden ciag kosztow)
+J1_R__1_E = [] # koszt jednostkowy przejazdu od zakladow produkcyjnych do klientow (podzielono od kazdego zakladu
+#  produkcyjnego do wszystkich klientow)
+M1_R__1_I = [] # dystans od sprzedawca do zakladu produkcyjnego
+M1_R__1_E = [] # dystans od zakladu produkcyjnego do jednostki, sprzedajacej gotowa produkcje
+S = [] # koszty uruchomienia zakladow produkcyjnych
+Q = 500 # pojemnosc auta dla transportowania gotowej produkcji (w litrach)
+Q_TIR = 24000 # pojemnosc auta, ktore transportuje surowiec (w kilogramach)
 # Q_TIR_all = [1/Q_TIR] * I * R  # dla zapisywania w funkcje celu
-Z = [] # ilości już zakupionych surowców u sprzedawców (kg)
-Z1_R = [] # ilość już przywiezionego surowca do zakładów produkcyjnych (kg)
-Z1_R_in_l = [] # ilość już przywiezionego surowca do zakładów produkcyjnych (l)
-Y = [] # ilość już wyprodukowanych produktów na zakładach produkcyjnych ale nie dowiezionych jeszcze do klientów
-A1_R__1_I_arr = [] # ogólna ilość surowca, którą było przetransportowano od sprzedawców do zakładów produkcyjnych
-# (jeden ciąg ilości)
-A1_R__1_I = [] # ogólna ilość surowca, którą było przetransportowano od sprzedawców do zakładów produkcyjnych
-A1_R__1_E_arr = [] # ogólna ilość produktu, którą było przetransportowano od zakładów produkcyjnych
-# do klientów (jeden ciąg ilości)
-A1_R__1_E = [] #  ogólna ilość produktu, którą było przetransportowano od zakładów produkcyjnych
-# do klientów (lists of lists)
-c1_R__1_I_arr = [] # strata przy transportowaniu surowca od sprzedawców do zakładów produkcyjnych (jeden ciąg strat)
-c1_R__1_I = [] # strata przy transportowaniu surowca od sprzedawców do zakładów produkcyjnych (lists of lists)
-c1_R__1_E_arr = [] # strata przy transportowaniu produktów od zakładów produkcyjnych do klientów (jeden ciąg strat)
-c1_R__1_E = [] # strata przy transportowaniu produktów od zakładów produkcyjnych do klientów (lists of lists)
-C = [] # strata przy produkcji, na zakładach produkcyjnych
-X1_R__1_I_arr = [] # ogólna ilość surowca, którą trzeba przetransportować oraz którą już przetransportowaliśmy
-# od sprzedawców do zakładów produkcyjnych (jeden ciąg ilości)
-X1_R__1_I = [] # ogólna ilość surowca, którą trzeba przetransportować oraz którą już przetransportowaliśmy
-# od sprzedawców do zakładów produkcyjnych (lists of lists)
-X1_R__1_E_arr = [] # ogólna ilość produktu, którą trzeba przetransportować oraz którą już przetransportowaliśmy
-# od zakładów produkcyjnych do klientów (jeden ciąg ilości)
-X1_R__1_E = [] # ogólna ilość produktu, którą trzeba przetransportować oraz którą już przetransportowaliśmy
-# od zakładów produkcyjnych do klientów (lists of lists)
-W1_I = [] # ogólna ilość surowca, którego już kupiliśmy oraz będziemy kupować u sprzedawców
-D1_R = [] # ogólna ilość produktu, co wyprodukowaliśmy oraz będziemy produkować na zakładach produkcyjnych
-W_all = 0 # ogólna dostępna ilość surowca do przetwarzania (u sprzedawców i na zakładach produkcyjnych)
-K_all = 0 # ilość produktu którą jeszcze trzeba wyprodukować, żeby spełnić ogólne zapotrzebowanie klientów
-G_all = 0 # suma produkcyjnej mocy wszystkich zakładów produkcyjnych
-P1_I = [] # koszty zakupionych surowców od 0 do i-ego sprzedawcy
-P1_R = [] # koszty produkowania produktów od 0 do r-ego zakładów produkcyjnych
-P1_R__1_I_arr = [] # koszt przewozu surowca od i-ego sprzedawcy do r-ego zakładu produkcyjnego (jeden ciąg kosztów)
-P1_R__1_I = [] # koszt przewozu surowca od i-ego sprzedawcy do r-ego zakładu produkcyjnego (list of lists)
-P1_R__1_E_arr = [] # koszt przewozu produktów z r-ego zakładu produkcyjnego do e-ego klienta (jeden ciąg kosztów)
-P1_R__1_E = [] # koszt przewozu produktów z r-ego zakładu produkcyjnego do e-ego klienta (list of lists)
-P_all = [] # koszt całkowity
+Z = [] # ilosci juz zakupionych surowcow u sprzedawcow (kg)
+Z1_R = [] # ilosc juz przywiezionego surowca do zakladow produkcyjnych (kg)
+Z1_R_in_l = [] # ilosc juz przywiezionego surowca do zakladow produkcyjnych (l)
+Y = [] # ilosc juz wyprodukowanych produktow na zakladach produkcyjnych ale nie dowiezionych jeszcze do klientow
+A1_R__1_I_arr = [] # ogolna ilosc surowca, ktora bylo przetransportowano od sprzedawcow do zakladow produkcyjnych
+# (jeden ciag ilosci)
+A1_R__1_I = [] # ogolna ilosc surowca, ktora bylo przetransportowano od sprzedawcow do zakladow produkcyjnych
+A1_R__1_E_arr = [] # ogolna ilosc produktu, ktora bylo przetransportowano od zakladow produkcyjnych
+# do klientow (jeden ciag ilosci)
+A1_R__1_E = [] #  ogolna ilosc produktu, ktora bylo przetransportowano od zakladow produkcyjnych
+# do klientow (lists of lists)
+c1_R__1_I_arr = [] # strata przy transportowaniu surowca od sprzedawcow do zakladow produkcyjnych (jeden ciag strat)
+c1_R__1_I = [] # strata przy transportowaniu surowca od sprzedawcow do zakladow produkcyjnych (lists of lists)
+c1_R__1_E_arr = [] # strata przy transportowaniu produktow od zakladow produkcyjnych do klientow (jeden ciag strat)
+c1_R__1_E = [] # strata przy transportowaniu produktow od zakladow produkcyjnych do klientow (lists of lists)
+C = [] # strata przy produkcji, na zakladach produkcyjnych
+X1_R__1_I_arr = [] # ogolna ilosc surowca, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy
+# od sprzedawcow do zakladow produkcyjnych (jeden ciag ilosci)
+X1_R__1_I = [] # ogolna ilosc surowca, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy
+# od sprzedawcow do zakladow produkcyjnych (lists of lists)
+X1_R__1_E_arr = [] # ogolna ilosc produktu, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy
+# od zakladow produkcyjnych do klientow (jeden ciag ilosci)
+X1_R__1_E = [] # ogolna ilosc produktu, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy
+# od zakladow produkcyjnych do klientow (lists of lists)
+W1_I = [] # ogolna ilosc surowca, ktorego juz kupilismy oraz bedziemy kupowac u sprzedawcow
+D1_R = [] # ogolna ilosc produktu, co wyprodukowalismy oraz bedziemy produkowac na zakladach produkcyjnych
+W_all = 0 # ogolna dostepna ilosc surowca do przetwarzania (u sprzedawcow i na zakladach produkcyjnych)
+K_all = 0 # ilosc produktu ktora jeszcze trzeba wyprodukowac, zeby spelnic ogolne zapotrzebowanie klientow
+G_all = 0 # suma produkcyjnej mocy wszystkich zakladow produkcyjnych
+P1_I = [] # koszty zakupionych surowcow od 0 do i-ego sprzedawcy
+P1_R = [] # koszty produkowania produktow od 0 do r-ego zakladow produkcyjnych
+P1_R__1_I_arr = [] # koszt przewozu surowca od i-ego sprzedawcy do r-ego zakladu produkcyjnego (jeden ciag kosztow)
+P1_R__1_I = [] # koszt przewozu surowca od i-ego sprzedawcy do r-ego zakladu produkcyjnego (list of lists)
+P1_R__1_E_arr = [] # koszt przewozu produktow z r-ego zakladu produkcyjnego do e-ego klienta (jeden ciag kosztow)
+P1_R__1_E = [] # koszt przewozu produktow z r-ego zakladu produkcyjnego do e-ego klienta (list of lists)
+P_all = [] # koszt calkowity
 
 
 for k in range(I):
     i.append(k)
-    Wi = random.randint(1000, 10000) # Ilość surowca w kg.
+    Wi = random.randint(1000, 10000) # Ilosc surowca w kg.
     W.append(Wi)
-    Ji = round(random.uniform(0.5, 3.0), 2) # koszt surowca od 0.5 zł do 3 zł za kilogram
+    Ji = round(random.uniform(0.5, 3.0), 2) # koszt surowca od 0.5 zl do 3 zl za kilogram
     J1_I.append(Ji)
     for k in range(R):
-        Jri = round(random.uniform(2, 4.5), 2) # cena za 1 km przewozu surowca autem cięzarowym
+        Jri = round(random.uniform(2, 4.5), 2) # cena za 1 km przewozu surowca autem ciezarowym
         J1_R__1_I_arr.append(Jri)
-        Mri = round(random.uniform(8.0, 35.5), 1) # odległość od i-ego sprzdawcy do r-ego przedsiębiorstwa
+        Mri = round(random.uniform(8.0, 35.5), 1) # odleglosc od i-ego sprzdawcy do r-ego przedsiebiorstwa
         M1_R__1_I.append(Mri)
-        Ari = random.randint(0, 50000) # ogólna ilość surowca, którą było przetransportowano od i-ego sprzedawcy
-        # do r-ego zakładu produkcyjnego
+        Ari = random.randint(0, 50000) # ogolna ilosc surowca, ktora bylo przetransportowano od i-ego sprzedawcy
+        # do r-ego zakladu produkcyjnego
         A1_R__1_I_arr.append(Ari)
         cri = random.randint(0, 50000) # strata przy transportowaniu surowca od i-ego sprzedawcy do r-ego
-        # zakładu produkcyjnego
+        # zakladu produkcyjnego
         c1_R__1_I_arr.append(cri)
-        Xri = random.randint(0, 100000) # ogólna ilość surowca, którą trzeba przetransportować oraz którą
-        # już przetransportowaliśmy od i-ego sprzedawcy do r-ego zakładu produkcyjnego
+        Xri = random.randint(0, 100000) # ogolna ilosc surowca, ktora trzeba przetransportowac oraz ktora
+        # juz przetransportowalismy od i-ego sprzedawcy do r-ego zakladu produkcyjnego
         X1_R__1_I_arr.append(Xri)
 
-    Zi = random.randint(500, 10000) # Ilość już zakupionego surowca u I-ego sprzedawcy w kg.
+    Zi = random.randint(500, 10000) # Ilosc juz zakupionego surowca u I-ego sprzedawcy w kg.
     Z.append(Zi)
 
 J1_R__1_I = [J1_R__1_I_arr[y:y + R] for y in range(0, len(J1_R__1_I_arr), R)]
@@ -103,34 +102,34 @@ X1_R__1_I = [X1_R__1_I_arr[c:c + R] for c in range(0, len(X1_R__1_I_arr), R)]
 
 for k in range(R):
     r.append(k)
-    Gr = random.randint(10000, 100000) # Produkcyjna moc zakładu produkcyjnego w l. na miesiąc
-    Vr = round(random.uniform(1, 2.5), 2) # współczynnik produkcji surowiec na produkt (od 1 do 2)
+    Gr = random.randint(10000, 100000) # Produkcyjna moc zakladu produkcyjnego w l. na miesiac
+    Vr = round(random.uniform(1, 2.5), 2) # wspolczynnik produkcji surowiec na produkt (od 1 do 2)
     G.append(Gr)
     V.append(Vr)
-    Jr = round(random.uniform(1, 1.9), 2) # cena od 1 do 1.9 zł za wyprodukowania 1 l. soku
+    Jr = round(random.uniform(1, 1.9), 2) # cena od 1 do 1.9 zl za wyprodukowania 1 l. soku
     J1_R.append(Jr)
     for k in range(E):
         Jre = round(random.uniform(0.4, 2.5), 2) # cena za 1 km przewozu produkcji
         J1_R__1_E_arr.append(Jre)
-        Mre = round(random.uniform(1.5, 13.5), 1)  # odległość od r-ego przedsiębiorstwa do e-go sprzedawcy
+        Mre = round(random.uniform(1.5, 13.5), 1)  # odleglosc od r-ego przedsiebiorstwa do e-go sprzedawcy
         M1_R__1_E.append(Mre)
-        Are = random.randint(0, 5000) # ogólna ilość produktu, którą było przetransportowano
-        # od r-ego zakładu produkcyjnego do e-ego klienta
+        Are = random.randint(0, 5000) # ogolna ilosc produktu, ktora bylo przetransportowano
+        # od r-ego zakladu produkcyjnego do e-ego klienta
         A1_R__1_E_arr.append(Are)
         cre = random.randint(0, 5000) # strata przy transportowaniu produktu
-        # od r-ego zakładu produkcyjnego do e-ego klienta
+        # od r-ego zakladu produkcyjnego do e-ego klienta
         c1_R__1_E_arr.append(cre)
-        Xre = Xri = random.randint(0, 50000) # ogólna ilość produktu, którą trzeba przetransportować oraz
-        # którą już przetransportowaliśmy od r-ego zakładu produkcyjnego do e-ego klienta
+        Xre = Xri = random.randint(0, 50000) # ogolna ilosc produktu, ktora trzeba przetransportowac oraz
+        # ktora juz przetransportowalismy od r-ego zakladu produkcyjnego do e-ego klienta
         X1_R__1_E_arr.append(Xre)
 
-    Sr = random.randint(3500, 6500) # koszt uruchomienia zakładów produkcyjnych
+    Sr = random.randint(3500, 6500) # koszt uruchomienia zakladow produkcyjnych
     S.append(Sr)
-    Zr = random.randint(500, 5000) # Ilość już przywiezionego surowca do R-ego zakładu produkcyjnego w kg.
+    Zr = random.randint(500, 5000) # Ilosc juz przywiezionego surowca do R-ego zakladu produkcyjnego w kg.
     Z1_R.append(Zr)
-    Yr = random.randint(100, 5000)  # ilość wyprodukowanego produktu na r-ym zakładzie produkcyjnym (w l.)
+    Yr = random.randint(100, 5000)  # ilosc wyprodukowanego produktu na r-ym zakladzie produkcyjnym (w l.)
     Y.append(Yr)
-    Cr = random.randint(100, 10000) # strata przy produkcji, na r-ym zakładzie produkcyjnym
+    Cr = random.randint(100, 10000) # strata przy produkcji, na r-ym zakladzie produkcyjnym
     C.append(Cr)
 
 J1_R__1_E = [J1_R__1_E_arr[y:y + E] for y in range(0, len(J1_R__1_E_arr), E)]
@@ -140,26 +139,26 @@ X1_R__1_E = [X1_R__1_E_arr[c:c + E] for c in range(0, len(X1_R__1_E_arr), E)]
 
 for k in range(E):
     e.append(k)
-    Ke = random.randint(100, 5000) #Popyt klienta na produkcję przedsiębiorstwa w l.
+    Ke = random.randint(100, 5000) #Popyt klienta na produkcje przedsiebiorstwa w l.
     K.append(Ke)
 
-W1_I = [sum(b) for b in X1_R__1_I] # ogólna ilość surowca, którego już kupiliśmy oraz będziemy kupować u sprzedawców
+W1_I = [sum(b) for b in X1_R__1_I] # ogolna ilosc surowca, ktorego juz kupilismy oraz bedziemy kupowac u sprzedawcow
 
-D1_R = [sum(c) for c in X1_R__1_E] # ogólna ilość produktu, co wyprodukowaliśmy oraz będziemy produkować
-# na zakładach produkcyjnych
+D1_R = [sum(c) for c in X1_R__1_E] # ogolna ilosc produktu, co wyprodukowalismy oraz bedziemy produkowac
+# na zakladach produkcyjnych
 
-W_all = sum(itertools.chain(W, Z, Z1_R)) # ogólna dostępna ilość surowca
-# do przetwarzania (u sprzedawców i na zakładach produkcyjnych);
+W_all = sum(itertools.chain(W, Z, Z1_R)) # ogolna dostepna ilosc surowca
+# do przetwarzania (u sprzedawcow i na zakladach produkcyjnych);
 
-K_all = sum(K) - sum(Y) # ilość produktu którą jeszcze trzeba wyprodukować,
-# żeby spełnić ogólne zapotrzebowanie klientów
+K_all = sum(K) - sum(Y) # ilosc produktu ktora jeszcze trzeba wyprodukowac,
+# zeby spelnic ogolne zapotrzebowanie klientow
 
 ki = 0
 for k in Z1_R:
     Z1_R_in_l.append(k/V[ki])
     ki += 1
 
-G_all = sum(G) - sum(Z1_R_in_l) # suma produkcyjnej mocy wszystkich zakładów produkcyjnych
+G_all = sum(G) - sum(Z1_R_in_l) # suma produkcyjnej mocy wszystkich zakladow produkcyjnych
 
 ki = 0
 for k in W1_I:
@@ -194,91 +193,91 @@ P1_R__1_E = [P1_R__1_E_arr[z:z + E] for z in range(0, len(P1_R__1_E_arr), E)]
 
 P_all = sum(P1_I) + sum(P1_R) + sum(P1_R__1_I_arr) + sum(P1_R__1_E_arr)
 
-print('numery jednostek sprzedającej surowiec: ', "\n",
+print('numery jednostek sprzedajacej surowiec: ', "\n",
       i, "\n",
       'numery/indeksy jednostek produkcyjnych: ', "\n",
       r, "\n",
-      'numery/indeksy klientów którzy tworzą zapotrzebowanie w produkcii jednostek produkcyjnych: ', "\n",
+      'numery/indeksy klientow ktorzy tworza zapotrzebowanie w produkcii jednostek produkcyjnych: ', "\n",
       e, "\n",
-      'ilość surowca u każdego z sprzedawców:', "\n",
+      'ilosc surowca u kazdego z sprzedawcow:', "\n",
       W, "\n",
       'W: ', W, "\n",
-      'obserwowana produkcyjna moc każdego z zakładów produkcyjnych: ', "\n",
+      'obserwowana produkcyjna moc kazdego z zakladow produkcyjnych: ', "\n",
       G, "\n",
-      'obserwowany popyt/zapotrzebowanie na produkcje przedsiębiorstwa każdego klienta: ', "\n",
+      'obserwowany popyt/zapotrzebowanie na produkcje przedsiebiorstwa kazdego klienta: ', "\n",
       K, "\n",
-      'współczynnik produkcji dla przeliczania ilości surowca na ilość produktu '
-      'na każdym zakładzie produkcyjnym:', "\n",
+      'wspolczynnik produkcji dla przeliczania ilosci surowca na ilosc produktu '
+      'na kazdym zakladzie produkcyjnym:', "\n",
       V, "\n",
-      'koszt jednostkowy surowca u każdego sprzedawcy: ', "\n",
+      'koszt jednostkowy surowca u kazdego sprzedawcy: ', "\n",
       J1_I, "\n",
-      'koszt jednostkowy przetwórstwa owocowo-warzywnej produkcji na każdym zakładzie produkcyjnym: ', "\n",
+      'koszt jednostkowy przetworstwa owocowo-warzywnej produkcji na kazdym zakladzie produkcyjnym: ', "\n",
       J1_R, "\n",
-      'koszt jednostkowy przejazdu od sprzedawców do zakładów produkcyjnych: ', "\n",
+      'koszt jednostkowy przejazdu od sprzedawcow do zakladow produkcyjnych: ', "\n",
       DataFrame(J1_R__1_I), "\n",
       'J1_R__1_I: ', J1_R__1_I, "\n",
       'J1_R__1_I_arr: ', J1_R__1_I_arr, "\n",
-      'koszt jednostkowy przejazdu od zakładów produkcyjnych do klientów: ', "\n",
+      'koszt jednostkowy przejazdu od zakladow produkcyjnych do klientow: ', "\n",
       DataFrame(J1_R__1_E), "\n",
       'J1_R__1_E: ', J1_R__1_E, "\n",
       'J1_R__1_E_arr: ', J1_R__1_E_arr, "\n",
-      'odległość od i-ego sprzdawcy do r-ego przedsiębiorstwa: ', "\n",
+      'odleglosc od i-ego sprzdawcy do r-ego przedsiebiorstwa: ', "\n",
       M1_R__1_I, "\n",
-      'odległość od r-ego przedsiębiorstwa do e-go sprzedawcy: ', "\n",
+      'odleglosc od r-ego przedsiebiorstwa do e-go sprzedawcy: ', "\n",
       M1_R__1_E, "\n",
-      'koszty uruchomienia zakładów produkcyjnych: ', "\n",
+      'koszty uruchomienia zakladow produkcyjnych: ', "\n",
       S, "\n",
-      'pojemność auta dla transportowania gotowej produkcji (w litrach): ', "\n",
+      'pojemnosc auta dla transportowania gotowej produkcji (w litrach): ', "\n",
       Q, "\n",
-      'pojemność auta, które transportuje surowiec (w kilogramach): ', "\n",
+      'pojemnosc auta, ktore transportuje surowiec (w kilogramach): ', "\n",
       Q_TIR, "\n",
-      'ilości już zakupionych surowców u sprzedawców (kg): ', "\n",
+      'ilosci juz zakupionych surowcow u sprzedawcow (kg): ', "\n",
       Z, "\n",
-      'ilość już przywiezionego surowca do zakładów produkcyjnych (kg): ', "\n",
+      'ilosc juz przywiezionego surowca do zakladow produkcyjnych (kg): ', "\n",
       Z1_R, "\n",
       'Z1_R:', Z1_R, "\n",
       'A1_R__1_E_arr:', A1_R__1_E_arr, "\n",
       'A1_R__1_I_arr', A1_R__1_I_arr, "\n",
-      'ilość już wyprodukowanych produktów na zakładach produkcyjnych '
-      'ale nie dowiezionych jeszcze do klientów (l): ', "\n",
+      'ilosc juz wyprodukowanych produktow na zakladach produkcyjnych '
+      'ale nie dowiezionych jeszcze do klientow (l): ', "\n",
       Y, "\n",
-      'ogólna ilość surowca, którą było przetransportowano od sprzedawców do zakładów produkcyjnych: ', "\n",
+      'ogolna ilosc surowca, ktora bylo przetransportowano od sprzedawcow do zakladow produkcyjnych: ', "\n",
       DataFrame(A1_R__1_I), "\n",
       A1_R__1_I, "\n",
-      'ogólna ilość produktu, którą było przetransportowano od zakładów produkcyjnych do klientów: ', "\n",
+      'ogolna ilosc produktu, ktora bylo przetransportowano od zakladow produkcyjnych do klientow: ', "\n",
       DataFrame(A1_R__1_E), "\n",
       'A1_R__1_E: ', A1_R__1_E, "\n",
-      'strata przy transportowaniu surowca od sprzedawców do zakładów produkcyjnych: ', "\n",
+      'strata przy transportowaniu surowca od sprzedawcow do zakladow produkcyjnych: ', "\n",
       DataFrame(c1_R__1_I), "\n",
-      'strata przy transportowaniu produktów od zakładów produkcyjnych do klientów: ', "\n",
+      'strata przy transportowaniu produktow od zakladow produkcyjnych do klientow: ', "\n",
       DataFrame(c1_R__1_E), "\n",
-      'strata przy produkcji, na zakładach produkcyjnych: ', "\n",
+      'strata przy produkcji, na zakladach produkcyjnych: ', "\n",
       C, "\n",
-      'ogólna ilość surowca, którą trzeba przetransportować oraz którą już przetransportowaliśmy '
-      'od sprzedawców do zakładów produkcyjnych: ', "\n",
+      'ogolna ilosc surowca, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy '
+      'od sprzedawcow do zakladow produkcyjnych: ', "\n",
       DataFrame(X1_R__1_I), "\n",
-      'ogólna ilość produktu, którą trzeba przetransportować oraz którą już przetransportowaliśmy '
-      'od zakładów produkcyjnych do klientów: ', "\n",
+      'ogolna ilosc produktu, ktora trzeba przetransportowac oraz ktora juz przetransportowalismy '
+      'od zakladow produkcyjnych do klientow: ', "\n",
       DataFrame(X1_R__1_E), "\n",
-      'ogólna ilość surowca, którego już kupiliśmy oraz będziemy kupować u sprzedawców: ', "\n",
+      'ogolna ilosc surowca, ktorego juz kupilismy oraz bedziemy kupowac u sprzedawcow: ', "\n",
       W1_I, "\n",
-      'ogólna ilość produktu, co wyprodukowaliśmy oraz będziemy produkować na zakładach produkcyjnych: ', "\n",
+      'ogolna ilosc produktu, co wyprodukowalismy oraz bedziemy produkowac na zakladach produkcyjnych: ', "\n",
       D1_R, "\n",
-      'ogólna dostępna ilość surowca do przetwarzania: ', "\n",
+      'ogolna dostepna ilosc surowca do przetwarzania: ', "\n",
       W_all, "\n",
-      'ilość produktu którą jeszcze trzeba wyprodukować, żeby spełnić ogólne zapotrzebowanie klientów: ', "\n",
+      'ilosc produktu ktora jeszcze trzeba wyprodukowac, zeby spelnic ogolne zapotrzebowanie klientow: ', "\n",
       K_all, "\n",
-      'suma produkcyjnej mocy wszystkich zakładów produkcyjnych: ', "\n",
+      'suma produkcyjnej mocy wszystkich zakladow produkcyjnych: ', "\n",
       G_all, "\n",
-      'koszty zakupionych surowców od 0 do i-ego sprzedawcy:', "\n",
+      'koszty zakupionych surowcow od 0 do i-ego sprzedawcy:', "\n",
       P1_I, "\n",
-      'koszty produkowania produktów od 0 do r-ego zakładów produkcyjnych:', "\n",
+      'koszty produkowania produktow od 0 do r-ego zakladow produkcyjnych:', "\n",
       P1_R, "\n",
-      'koszty przewozu surowca od i-ych sprzedawców do r-ych zakładów produkcyjnych:', "\n",
+      'koszty przewozu surowca od i-ych sprzedawcow do r-ych zakladow produkcyjnych:', "\n",
       DataFrame(P1_R__1_I), "\n",
-      'koszty przewozu produktów z r-ych zakładów produkcyjnych do e-ych klientów:', "\n",
+      'koszty przewozu produktow z r-ych zakladow produkcyjnych do e-ych klientow:', "\n",
       DataFrame(P1_R__1_E), "\n",
-      'koszt całkowity. Parametr funkcji celu:', "\n",
+      'koszt calkowity. Parametr funkcji celu:', "\n",
       P_all, "\n")
 
 
